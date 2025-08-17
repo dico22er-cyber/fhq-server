@@ -75,7 +75,8 @@ class UtilsShell:
                     _output.write("ERROR: returncode " + str(_returncode) + "\n")
                 sys.exit(_returncode)
             return
-        sys.exit("Could not start process")
+        print("ERROR: Could not start process")
+        sys.exit(-1)
 
     @staticmethod
     def run_command_get_output(_log, _command):
