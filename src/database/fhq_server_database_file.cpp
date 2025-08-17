@@ -116,6 +116,7 @@ bool FhqServerDatabaseSqlQuery::sel(const std::string &sColumnName) {
     return false;
   }
   m_sSqlQuery0 += sColumnName + ", ";
+  return true;
 }
 
 bool FhqServerDatabaseSqlQuery::add(const std::string &sColumnName, const std::string &sValue) {
