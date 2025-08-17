@@ -83,7 +83,6 @@ class UtilsShell:
         """ run_command_get_output """
         # _log.info("Run command: " + " ".join(_command))
         _output = ""
-        _returncode = -1
         with subprocess.Popen(
             _command,
             stdout=subprocess.PIPE,
