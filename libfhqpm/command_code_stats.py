@@ -95,7 +95,6 @@ class CommandCodeStats:
 
         files = UtilsFiles.get_all_files(src_wsjcpp_dir)
         for filepath in files:
-            lines = UtilsFiles.safe_read_file(filepath)
             is_header = _fp.endswith(".h") or _fp.endswith(".hpp")
             is_source_code = _fp.endswith(".cpp") or _fp.endswith(".c") or _fp.endswith(".cc")
             if is_source_code or is_header:
