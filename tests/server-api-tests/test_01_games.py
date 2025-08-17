@@ -159,7 +159,6 @@ def load_image_for_game_logo():
         image_png_base64 = base64.b64encode(image_png_base64)
         image_png_base64 = image_png_base64.decode("utf-8")
         return image_png_base64
-    return None
 
 def extract_zip_game_data(data_base64, game2_zip_path, tmp_dir_unpack_zip):
     """ extract zip game data """
