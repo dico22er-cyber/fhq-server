@@ -42,6 +42,7 @@ REGISTRY_WJSCPP_EMPLOY(EmployNotify)
 
 // ---------------------------------------------------------------------
 
+std::string EmployNotify::SERVER = "server";
 std::string EmployNotify::GAMES = "games";
 std::string EmployNotify::QUESTS = "quests";
 std::string EmployNotify::USERS = "users";

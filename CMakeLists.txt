@@ -156,6 +156,7 @@ list (APPEND WSJCPP_SOURCES "src/employees/employ_uuids.cpp")
 # tasks
 list (APPEND WSJCPP_SOURCES "src/tasks/runtasks.h")
 list (APPEND WSJCPP_SOURCES "src/tasks/runtasks.cpp")
+list (APPEND WSJCPP_SOURCES "src/tasks/update_database_after_server_start_task.cpp")
 list (APPEND WSJCPP_SOURCES "src/tasks/mail_send_task.h")
 list (APPEND WSJCPP_SOURCES "src/tasks/mail_send_task.cpp")
 list (APPEND WSJCPP_SOURCES "src/tasks/notify_to_all_task.h")

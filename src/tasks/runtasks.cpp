@@ -38,6 +38,7 @@
 #include <update_quest_solved_task.h>
 #include <update_user_location_task.h>
 #include <update_user_rating_task.h>
+#include <update_database_after_server_start_task.h>
 #include <wsjcpp_core.h>
 
 #include <QRunnable>
@@ -88,6 +89,11 @@ void RunTasks::LXDAsyncOperation(
 ) {
   LXDAsyncOperationTask *pLXDAsyncTask = new LXDAsyncOperationTask(func, sName, sCMD, pRequest);
   QThreadPool::globalInstance()->start(pLXDAsyncTask);
+}
+
+void RunTasks::UpdateDatabaseAfterServerStart() {
+  auto *pTask = new UpdateDatabaseAfterServerStartTask();
+  QThreadPool::globalInstance()->start(pTask);
 }
 
 void RunTasks::waitForDone() {
