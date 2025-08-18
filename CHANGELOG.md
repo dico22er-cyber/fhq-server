@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [v0.2.54] - 2025-08-10 (2025 ???)
 
+- Added new task for runtime migration data (update missing uuids)
+- Removed unsed and deprecated options
+- Fix TODO deprecated setWorkDir and fix behaivor when not set '-wd'
+- Fix pylint warnings
+- Fixed 'Unreachable code' in 'tests/server-api-tests/test_01_games.py' by code-scanning
+- Fixed 'Variable defined multiple times' in 'libfhqpm/command_code_stats.py' by code-scanning
+- Fixed 'Variable defined multiple times ' in 'libfhqpm/utils_shell.py' by code-scanning
+- Fixed 'Unreachable code' in 'libfhqpm/utils_shell.py' by code-scanning
+- Fix warning
+- Updated .vscode/settings.json
+- Added new field uuid to public_event table
+- Added EmployPublicEvents and redesing work with this employ in cmd
+- Added model_public_event
 
 ## [v0.2.53] - 2025-08-10 (2025 Jule 21)
 
