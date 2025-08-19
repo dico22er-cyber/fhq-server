@@ -217,6 +217,7 @@ bool FhqServerDatabaseSqlQuery::where(const std::string &sColumnName, int nValue
   } else if (m_nSqlType == FhqServerDatabaseSqlQueryType::UPDATE) {
     m_sSqlQuery1 += sColumnName + " = " + std::to_string(nValue);
   }
+  return true;
 }
 
 bool FhqServerDatabaseSqlQuery::where(const std::string &sColumnName, long nValue) {
