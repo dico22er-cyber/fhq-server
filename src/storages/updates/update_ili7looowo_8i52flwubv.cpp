@@ -36,8 +36,8 @@
 REGISTRY_WSJCPP_STORAGE_UPDATE(Update_ili7looowo_8i52flwubv)
 
 Update_ili7looowo_8i52flwubv::Update_ili7looowo_8i52flwubv()
-    : WsjcppStorageUpdateBase("ili7looowo", "8i52flwubv", "Add column uuid to public_events") {
+  : WsjcppStorageUpdateBase("ili7looowo", "8i52flwubv", "Add column uuid to public_events") {
 
-    WsjcppStorageModifyTable *games = modifyTable("public_events");
-    games->addColumn("uuid").string(36).notNull().defaultValue("");
+  WsjcppStorageModifyTable *games = modifyTable("public_events");
+  games->addColumn("uuid").string(36).notNull().defaultValue("");
 }

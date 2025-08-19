@@ -195,9 +195,7 @@ WsjcppSettingItem &WsjcppSettingItem::list() {
   return *this;
 }
 
-void WsjcppSettingItem::resetInit() {
-  m_bInited = false;
-}
+void WsjcppSettingItem::resetInit() { m_bInited = false; }
 
 void WsjcppSettingItem::checkWithThrow() const {
   if (m_nSettingType == WJSCPP_SETTING_TYPE_NONE) {

@@ -34,15 +34,15 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QSqlError>  // TODO redesign
 #include <QSqlQuery>  // TODO redesign
 #include <QSqlRecord> // TODO redesign
-#include <QSqlError> // TODO redesign
 #include <QString>
 #include <QThread>
 
-#include <employ_uuids.h>
 #include <employ_database.h>
 #include <employ_notify.h>
+#include <employ_uuids.h>
 
 UpdateDatabaseAfterServerStartTask::UpdateDatabaseAfterServerStartTask() {
   TAG = "UpdateDatabaseAfterServerStartTask";
@@ -109,7 +109,8 @@ void UpdateDatabaseAfterServerStartTask::UpdateMissingUuidsInPublicEvents() {
     int nNewPersentd = (nProcessed * 100) / nCount;
     if (nNewPersentd != nPersents) {
       nPersents = nNewPersentd;
-      std::string sMessage = "Public events: " + std::to_string(nPersents) + "% processed (" + std::to_string(nProcessed) + "/" + std::to_string(nCount) + ")";
+      std::string sMessage = "Public events: " + std::to_string(nPersents) + "% processed (" +
+                             std::to_string(nProcessed) + "/" + std::to_string(nCount) + ")";
       pNotify->notifyInfo(EmployNotify::SERVER, sMessage);
       WsjcppLog::info(TAG, sMessage);
     }

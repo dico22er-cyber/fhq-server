@@ -33,15 +33,16 @@
 
 #include <employ_database.h>
 #include <employ_notify.h>
-#include <employ_uuids.h>
 #include <employ_public_events.h>
+#include <employ_uuids.h>
 #include <employees.h>
 
 REGISTRY_WJSCPP_EMPLOY(EmployPublicEvents)
 
 EmployPublicEvents::EmployPublicEvents()
   : WsjcppEmployBase(
-      EmployPublicEvents::name(), {EmployDatabase::name(), EmployUuids::name(), EmployGlobalSettings::name(), EmployNotify::name()}
+      EmployPublicEvents::name(),
+      {EmployDatabase::name(), EmployUuids::name(), EmployGlobalSettings::name(), EmployNotify::name()}
     ) {
   TAG = EmployPublicEvents::name();
 }

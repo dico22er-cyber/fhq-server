@@ -36,7 +36,6 @@
 #include <wsjcpp_storages.h>
 
 class Update_ili7looowo_8i52flwubv : public WsjcppStorageUpdateBase {
-    public:
-        Update_ili7looowo_8i52flwubv();
+public:
+  Update_ili7looowo_8i52flwubv();
 };
-
