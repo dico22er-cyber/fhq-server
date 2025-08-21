@@ -86,6 +86,8 @@ public:
   WsjcppSettingItem &json();
   WsjcppSettingItem &list();
 
+  void resetInit(); // TODO redesign some
+
   void checkWithThrow() const;
   bool isInited() const;
   bool isReadonly() const;
@@ -199,12 +201,13 @@ public:
   static std::string name() { return "EmployGlobalSettings"; }
   virtual bool init(); // here will be init from file
   virtual bool deinit();
-  void setWorkDir(const std::string &sWorkDir); // TODO deprecated
+  // void setWorkDir(const std::string &sWorkDir); // TODO deprecated
 
   WsjcppSettingItem &registrySetting(const std::string &sSettingGroup, const std::string &sSettingName);
 
   const WsjcppSettingItem &get(const std::string &sSettingName);
   bool exists(const std::string &sSettingName);
+  void reset(const std::string &sSettingName);
   void update(const std::string &sSettingName, const std::string &sValue);
   void update(const std::string &sSettingName, int nValue);
   void update(const std::string &sSettingName, bool bValue);
@@ -218,7 +221,7 @@ public:
 
 private:
   std::string TAG;
-  std::string m_sWorkDir;
+  // std::string m_sWorkDir;
   std::string m_sFilepathConf;
   WsjcppSettingsStore *m_pDatabaseSettingsStore;
 

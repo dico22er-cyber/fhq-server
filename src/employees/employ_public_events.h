@@ -31,23 +31,29 @@
 
 #pragma once
 
-#include <cmd_handlers.h>
+#include <employees.h>
+#include <model_public_event.h>
 
-class RunTasks {
+class EmployPublicEvents : public WsjcppEmployBase {
 public:
-  static void AddPublicEvents(const std::string &sType, const std::string &sMessage, const nlohmann::json &jsonMeta);
-  static void UpdateUserLocation(int userid, const std::string &sLastip);
-  static void UpdateMaxScoreGame(int gameid);
-  static void UpdateUserRating(int nUserID);
-  static void UpdateQuestSolved(int nQuestID);
-  static void MailSend(const std::string &sTo, const std::string &sSubject, const std::string &sContent);
-  static void NotifyToAll(const nlohmann::json &jsonMessage);
-  static void LXDAsyncOperation(
-    void (*func)(const std::string &, std::string &, int &),
-    const std::string &sName,
-    const std::string &sCMD,
-    ModelRequest *pRequest
+  EmployPublicEvents();
+  static std::string name() { return "EmployPublicEvents"; }
+  virtual bool init();
+  virtual bool deinit() override;
+
+  bool findPublicEvent(int nEventId, ModelPublicEvent &eventInfo, std::string &sErrorMessage);
+  bool removePublicEvent(int nEventId, std::string &sErrorMessage);
+  bool addPublicEvent(ModelPublicEvent &eventInfo, std::string &sErrorMessage);
+  bool findPublicEvents(
+    std::vector<ModelPublicEvent> &eventList,
+    int nPage,
+    int nOnPage,
+    const std::string &sType,
+    const std::string &sSearch,
+    int &nRecordsFound,
+    std::string &sErrorMessage
   );
-  static void UpdateDatabaseAfterServerStart();
-  static void waitForDone();
+
+private:
+  std::string TAG;
 };

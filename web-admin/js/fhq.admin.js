@@ -224,15 +224,16 @@ fhq.showSignInForm = function(){
     var modal = new SwaModalDialog();
     modal.show({
         title: 'Sign In (for admin)',
+        show_close: false,
         body: [
-            'Admin e-mail: <input id="login_admin_email" type="text"/>',
-            'Admin password: <input id="login_admin_password" type="password"/>',
+            'Admin e-mail: <input id="login_admin_email" type="text" onkeyup="if (event.keyCode === 13) { document.getElementById(\'login_admin_password\').focus(); }"/>',
+            'Admin password: <input id="login_admin_password" type="password" onkeyup="if (event.keyCode === 13) { fhqDoLogin(\'' + modal.modalId + '\'); }"/>',
             '<div class="swa-error-alert" style="display: none" id="login_admin_error"></div>',
         ],
         buttons: ''
             + '<button type="button" class="swa-button" '
             + '   onclick="fhqDoLogin(\'' + modal.modalId + '\');">Sign-in</button> '
-            + '<button type="button" class="swa-button" onclick="swaCloseModalDialog(\'' + modal.modalId + '\');">Close</button>',
+            // + '<button type="button" class="swa-button" onclick="swaCloseModalDialog(\'' + modal.modalId + '\');">Close</button>',
     });
 }
 

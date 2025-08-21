@@ -38,7 +38,7 @@
 #include <QSqlRecord> // TODO redesign
 #include <QString>
 #include <QThread>
-#include <employ_database.h>
+#include <employ_public_events.h>
 
 AddPublicEventsTask::AddPublicEventsTask(
   const std::string &sType, const std::string &sMessage, const nlohmann::json &jsonMeta
@@ -53,17 +53,16 @@ AddPublicEventsTask::~AddPublicEventsTask() {}
 
 void AddPublicEventsTask::run() {
   WsjcppLog::info(TAG, "message " + m_sMessage);
-  EmployDatabase *pDatabase = findWsjcppEmploy<EmployDatabase>();
-  QSqlDatabase db = *(pDatabase->database());
-  QSqlQuery query(db);
-  query.prepare("INSERT INTO public_events(type,dt,message,meta) "
-                "VALUES(:type,NOW(),:message,:meta)");
-  query.bindValue(":type", QString::fromStdString(m_sType));
-  query.bindValue(":message", QString::fromStdString(m_sMessage));
+  auto *pEvents = findWsjcppEmploy<EmployPublicEvents>();
+
+  ModelPublicEvent eventInfo;
+  eventInfo.setType(m_sType);
+  eventInfo.setMessage(m_sMessage);
   std::string sMeta = m_jsonMeta.dump();
-  // WsjcppLog::warn(TAG, "sMeta = " + sMeta);
-  query.bindValue(":meta", QString::fromStdString(sMeta));
-  if (!query.exec()) {
-    WsjcppLog::err(TAG, query.lastError().text().toStdString());
+  eventInfo.setMeta(sMeta);
+
+  std::string sErrorMessage;
+  if (!pEvents->addPublicEvent(eventInfo, sErrorMessage)) {
+    WsjcppLog::err(TAG, sErrorMessage);
   }
 };

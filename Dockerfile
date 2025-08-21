@@ -13,6 +13,8 @@ RUN python3 -u pm.py clean && ./build_simple.sh
 COPY ./web-user /root/web-user
 RUN cp -rf /root/node_modules_cache/node_modules /root/web-user
 WORKDIR /root/web-user
+RUN node -v
+RUN npm -v
 RUN npm install && npm run build-prod
 
 FROM sea5kg/fhq-server-release-environment:2025-08-06

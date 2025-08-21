@@ -116,6 +116,7 @@ bool FhqServerDatabaseSqlQuery::sel(const std::string &sColumnName) {
     return false;
   }
   m_sSqlQuery0 += sColumnName + ", ";
+  return true;
 }
 
 bool FhqServerDatabaseSqlQuery::add(const std::string &sColumnName, const std::string &sValue) {
@@ -216,6 +217,7 @@ bool FhqServerDatabaseSqlQuery::where(const std::string &sColumnName, int nValue
   } else if (m_nSqlType == FhqServerDatabaseSqlQueryType::UPDATE) {
     m_sSqlQuery1 += sColumnName + " = " + std::to_string(nValue);
   }
+  return true;
 }
 
 bool FhqServerDatabaseSqlQuery::where(const std::string &sColumnName, long nValue) {

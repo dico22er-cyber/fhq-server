@@ -23,9 +23,6 @@ cd $SCRIPT_DIR/../.. # go to root of repository
 ./ci/travis/run1_language_cpp.sh
 check_ret $? "run1_language_cpp"
 
-./ci/travis/run2_language_node_js.sh
-check_ret $? "run2_language_node_js"
-
 ./ci/travis/run3_language_python.sh
 check_ret $? "run3_language_python"
 

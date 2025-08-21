@@ -80,12 +80,14 @@ ArgumentProcessorMain::ArgumentProcessorMain(QCoreApplication *pQtApp)
 
   m_sWorkDir = "";
   std::vector<std::string> vDefaultsWorkdirs = {
-    WsjcppCore::getCurrentDirectory() + "./data/",
-    WsjcppCore::getCurrentDirectory() + "./ci/travis/data/",
+    WsjcppCore::getCurrentDirectory() + "/data/",
+    WsjcppCore::getCurrentDirectory() + "/ci/travis/data/",
     "/usr/share/fhq-server/data"};
   for (int i = 0; i < vDefaultsWorkdirs.size(); i++) {
     if (WsjcppCore::dirExists(vDefaultsWorkdirs[i])) {
       m_sWorkDir = vDefaultsWorkdirs[i];
+      setWorkDir(m_sWorkDir);
+      break;
     }
   }
 }
@@ -128,7 +130,8 @@ bool ArgumentProcessorMain::setWorkDir(const std::string &sWorkDir_) {
 
   // configure employ
   if (sWorkDir != "") {
-    pGlobalSettings->setWorkDir(sWorkDir);
+    // pGlobalSettings->setWorkDir(sWorkDir);
+    pGlobalSettings->reset("work_dir");
     pGlobalSettings->update("work_dir", sWorkDir);
   }
 
@@ -140,6 +143,7 @@ bool ArgumentProcessorMain::setWorkDir(const std::string &sWorkDir_) {
       return false;
     }
   }
+  pGlobalSettings->reset("log_dir");
   pGlobalSettings->update("log_dir", sDirLogs);
   WsjcppLog::setLogDirectory(sDirLogs);
   m_sWorkDir = sWorkDir;

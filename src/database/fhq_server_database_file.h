@@ -32,8 +32,8 @@
 #pragma once
 
 #include <cstring>
-#include <string>
 #include <mutex>
+#include <string>
 #include <vector>
 
 class FhqServerDatabaseFileUpdateInfo {

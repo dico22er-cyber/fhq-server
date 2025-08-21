@@ -118,6 +118,8 @@ list (APPEND WSJCPP_SOURCES "src/models/model_useful_link.cpp")
 list (APPEND WSJCPP_SOURCES "src/models/model_useful_link_comment.cpp")
 list (APPEND WSJCPP_SOURCES "src/models/model_useful_link_tag.cpp")
 list (APPEND WSJCPP_SOURCES "src/models/model_useful_link_user_favorite.cpp")
+list (APPEND WSJCPP_SOURCES "src/models/model_public_event.cpp")
+
 
 # validators
 list (APPEND WSJCPP_SOURCES "src/validators/validators.cpp")
@@ -136,6 +138,7 @@ list (APPEND WSJCPP_SOURCES "src/utils/utils_lxd.cpp")
 
 # employees
 list (APPEND WSJCPP_SOURCES "src/employees/employ_chats.cpp")
+list (APPEND WSJCPP_SOURCES "src/employees/employ_database.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_images.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_games.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_files.cpp")
@@ -143,8 +146,8 @@ list (APPEND WSJCPP_SOURCES "src/employees/employ_notify.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_quests.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_server_info.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_scoreboard.cpp")
-list (APPEND WSJCPP_SOURCES "src/employees/employ_database.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_orchestra.cpp")
+list (APPEND WSJCPP_SOURCES "src/employees/employ_public_events.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_leaks.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_mails.cpp")
 list (APPEND WSJCPP_SOURCES "src/employees/employ_users.cpp")
@@ -153,6 +156,7 @@ list (APPEND WSJCPP_SOURCES "src/employees/employ_uuids.cpp")
 # tasks
 list (APPEND WSJCPP_SOURCES "src/tasks/runtasks.h")
 list (APPEND WSJCPP_SOURCES "src/tasks/runtasks.cpp")
+list (APPEND WSJCPP_SOURCES "src/tasks/update_database_after_server_start_task.cpp")
 list (APPEND WSJCPP_SOURCES "src/tasks/mail_send_task.h")
 list (APPEND WSJCPP_SOURCES "src/tasks/mail_send_task.cpp")
 list (APPEND WSJCPP_SOURCES "src/tasks/notify_to_all_task.h")
@@ -183,6 +187,7 @@ list (APPEND WSJCPP_SOURCES "src/storages/updates/update_pmlyt8k7nm_215438peu8.c
 list (APPEND WSJCPP_SOURCES "src/storages/updates/update_215438peu8_9gwc2tm5ah.cpp")
 list (APPEND WSJCPP_SOURCES "src/storages/updates/update_9gwc2tm5ah_on73sheet9.cpp")
 list (APPEND WSJCPP_SOURCES "src/storages/updates/update_on73sheet9_ili7looowo.cpp")
+list (APPEND WSJCPP_SOURCES "src/storages/updates/update_ili7looowo_8i52flwubv.cpp")
 list (APPEND WSJCPP_SOURCES "src/storages/updates/update0101.cpp")
 
 # web-server

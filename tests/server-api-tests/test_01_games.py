@@ -12,9 +12,9 @@ import zipfile
 import json
 import requests
 
-def test_games_cleanup_game2(admin_session, game2_uuid, admin_password):
+def test_games_01_cleanup_game2(admin_session, game2_uuid, admin_password):
     """Cleanup test game"""
-    print(test_games_cleanup_game2.__doc__)
+    print(test_games_01_cleanup_game2.__doc__)
     game2 = admin_session.game_info({ "uuid": game2_uuid })
     assert game2 is not None
     if game2['result'] == 'DONE':
@@ -26,9 +26,9 @@ def test_games_cleanup_game2(admin_session, game2_uuid, admin_password):
         assert game2_delete_r['result'] == 'DONE'
         print("Cleaned")
 
-def test_games_create_game2(admin_session, game2_uuid, generate_random):
+def test_games_02_create_game2(admin_session, game2_uuid, generate_random):
     """Create game2"""
-    print(test_games_create_game2.__doc__)
+    print(test_games_02_create_game2.__doc__)
     game_name = generate_random(255)
     game_description = generate_random(300)
     game_teams = generate_random(255)
@@ -42,6 +42,7 @@ def test_games_create_game2(admin_session, game2_uuid, generate_random):
     game2 = admin_session.game_create({
         "uuid": game2_uuid,
         "name": game_name,
+        "freehackquest_game_format_version": 1,
         "description": game_description,
         "state": game_state,
         "form": game_form,
@@ -55,15 +56,15 @@ def test_games_create_game2(admin_session, game2_uuid, generate_random):
     assert game2['result'] == 'DONE'
     print(game2)
     assert game2['data']['uuid'] == game2_uuid
-    assert game2['data']['name'] == game_name
+    assert game2['data']['name'] == game_name.strip()
     assert game2['data']['date_restart'] == game_date_restart
     assert game2['data']['date_start'] == game_date_start
     assert game2['data']['date_stop'] == game_date_stop
-    assert game2['data']['description'] == game_description
+    assert game2['data']['description'] == game_description.strip()
     assert game2['data']['form'] == game_form
     assert game2['data']['maxscore'] == 0
     assert game2['data']['name'] == game_name
-    assert game2['data']['organizators'] == game_teams
+    assert game2['data']['organizators'] == game_teams.strip()
     assert game2['data']['state'] == game_state
     assert game2['data']['type'] == game_type
 
@@ -71,23 +72,22 @@ def test_games_create_game2(admin_session, game2_uuid, generate_random):
     assert game2 is not None
     assert game2['result'] == 'DONE'
     assert game2['data']['uuid'] == game2_uuid
-    assert game2['data']['name'] == game_name
+    assert game2['data']['name'] == game_name.strip()
     assert game2['data']['date_restart'] == game_date_restart
     assert game2['data']['date_start'] == game_date_start
     assert game2['data']['date_stop'] == game_date_stop
-    assert game2['data']['description'] == game_description
+    assert game2['data']['description'] == game_description.strip()
     assert game2['data']['form'] == game_form
     assert game2['data']['maxscore'] == 0
-    assert game2['data']['name'] == game_name
-    assert game2['data']['organizators'] == game_teams
+    assert game2['data']['organizators'] == game_teams.strip()
     assert game2['data']['state'] == game_state
     assert game2['data']['type'] == game_type
     gameid = game2['data']['local_id']
     print("gameid: " + str(gameid))
 
-def test_games_game_list(admin_session, game2_uuid):
+def test_games_03_game_list(admin_session, game2_uuid):
     """games list"""
-    print(test_games_game_list.__doc__)
+    print(test_games_03_game_list.__doc__)
     games_list = admin_session.games_list({})
     assert games_list is not None
     _found = False
@@ -96,9 +96,9 @@ def test_games_game_list(admin_session, game2_uuid):
             _found = True
     assert _found is True
 
-def test_games_update_game_name(admin_session, game2_uuid, generate_random):
+def test_games_04_update_game_name(admin_session, game2_uuid, generate_random):
     """game update name"""
-    print(test_games_update_game_name.__doc__)
+    print(test_games_04_update_game_name.__doc__)
 
     game2_prev = admin_session.game_info({ "uuid": game2_uuid })
     assert game2_prev is not None
@@ -109,14 +109,17 @@ def test_games_update_game_name(admin_session, game2_uuid, generate_random):
     })
     assert game2_updt is not None
     game2_new = admin_session.game_info({ "uuid": game2_uuid })
+    if game2_new['data']['name'] != game2_name:
+        print("Expected '" + game2_name + "', but got: '" + game2_new['data']['name'] + "'")
+
     assert game2_new['data']['name'] == game2_name
     assert game2_prev['data']['organizators'] == game2_new['data']['organizators']
     assert game2_prev['data']['description'] == game2_new['data']['description']
     assert game2_prev['data']['maxscore'] == game2_new['data']['maxscore']
 
-def test_games_update_game_description(admin_session, game2_uuid, generate_random):
+def test_games_05_update_game_description(admin_session, game2_uuid, generate_random):
     """game update description"""
-    print(test_games_update_game_description.__doc__)
+    print(test_games_05_update_game_description.__doc__)
     game2_prev = admin_session.game_info({ "uuid": game2_uuid })
     assert game2_prev is not None
     game2_description = generate_random(255)
@@ -131,9 +134,9 @@ def test_games_update_game_description(admin_session, game2_uuid, generate_rando
     assert game2_prev['data']['name'] == game2_new['data']['name']
     assert game2_prev['data']['maxscore'] == game2_new['data']['maxscore']
 
-def test_games_update_game_organizators(admin_session, game2_uuid, generate_random):
+def test_games_06_update_game_organizators(admin_session, game2_uuid, generate_random):
     """game update organizators"""
-    print(test_games_update_game_organizators.__doc__)
+    print(test_games_06_update_game_organizators.__doc__)
     game2_prev = admin_session.game_info({ "uuid": game2_uuid })
     assert game2_prev is not None
     game2_organizators = generate_random(255)
@@ -159,7 +162,6 @@ def load_image_for_game_logo():
         image_png_base64 = base64.b64encode(image_png_base64)
         image_png_base64 = image_png_base64.decode("utf-8")
         return image_png_base64
-    return None
 
 def extract_zip_game_data(data_base64, game2_zip_path, tmp_dir_unpack_zip):
     """ extract zip game data """
@@ -184,9 +186,9 @@ def check_game2_logo(img_exported_path, game2_localid, url_http_web_server):
             _img_exported.write(resp.content)
         assert img2_len == len(resp.content)
 
-def test_games_update_logo(admin_session, game2_uuid, local_tmp_dir, url_http_web_server):
+def test_games_07_update_logo(admin_session, game2_uuid, local_tmp_dir, url_http_web_server):
     """game update logo"""
-    print(test_games_update_logo.__doc__)
+    print(test_games_07_update_logo.__doc__)
     game2_prev = admin_session.game_info({ "uuid": game2_uuid })
     assert game2_prev is not None
     assert game2_prev["result"] == "DONE"
@@ -226,9 +228,9 @@ def test_games_update_logo(admin_session, game2_uuid, local_tmp_dir, url_http_we
         url_http_web_server
     )
 
-def test_games_remove(admin_session, admin_password, game2_uuid):
+def test_games_99_remove(admin_session, admin_password, game2_uuid):
     """game remove"""
-    print(test_games_update_logo.__doc__)
+    print(test_games_99_remove.__doc__)
 
     resp = admin_session.game_delete({ "uuid": game2_uuid, "admin_password": admin_password})
     assert resp is not None

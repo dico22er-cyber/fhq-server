@@ -34,6 +34,7 @@
 #include <add_public_events_task.h>
 #include <mail_send_task.h>
 #include <notify_to_all_task.h>
+#include <update_database_after_server_start_task.h>
 #include <update_max_score_game_task.h>
 #include <update_quest_solved_task.h>
 #include <update_user_location_task.h>
@@ -88,6 +89,11 @@ void RunTasks::LXDAsyncOperation(
 ) {
   LXDAsyncOperationTask *pLXDAsyncTask = new LXDAsyncOperationTask(func, sName, sCMD, pRequest);
   QThreadPool::globalInstance()->start(pLXDAsyncTask);
+}
+
+void RunTasks::UpdateDatabaseAfterServerStart() {
+  auto *pTask = new UpdateDatabaseAfterServerStartTask();
+  QThreadPool::globalInstance()->start(pTask);
 }
 
 void RunTasks::waitForDone() {

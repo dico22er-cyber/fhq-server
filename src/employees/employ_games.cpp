@@ -29,12 +29,14 @@
  *
  ***********************************************************************************/
 
+#include "employ_games.h"
+
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <employ_database.h>
-#include <employ_games.h>
 #include <employ_notify.h>
+#include <employ_uuids.h>
 #include <fstream>
 #include <json.hpp>
 #include <sys/stat.h>
@@ -45,7 +47,8 @@ REGISTRY_WJSCPP_EMPLOY(EmployGames)
 
 EmployGames::EmployGames()
   : WsjcppEmployBase(
-      EmployGames::name(), {EmployDatabase::name(), EmployGlobalSettings::name(), EmployNotify::name()}
+      EmployGames::name(),
+      {EmployDatabase::name(), EmployUuids::name(), EmployGlobalSettings::name(), EmployNotify::name()}
     ) {
   TAG = EmployGames::name();
 }
@@ -143,6 +146,8 @@ bool EmployGames::init() {
     m_vectCacheGame.push_back(pModelGame);
     // TODO
   }
+
+  findWsjcppEmploy<EmployUuids>()->addAllowedTypesOfUuid("game");
 
   return true;
 }

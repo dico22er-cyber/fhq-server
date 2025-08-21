@@ -52,30 +52,32 @@ class CommandRebuildEnvironmentImages:
         self.__subcomamnd_name = "rebuild-environment-images"
         self.__debian_version = "12"
         self.__node_version = "24"
-        self.__build_packages = [
-            "make",
-            "cmake",
-            "gcc",
-            "g++",
-            "curl",
-            "pkg-config",
-            "libcurl4-openssl-dev",
-            "zlib1g-dev",
-            "libpng-dev",
-            "default-libmysqlclient-dev",
-            "libwebsockets-dev",
-            "apt-utils",
-            "build-essential",
-            "nodejs",
-        ]
-        self.__release_packages = [
-            "libcurl4",
-            "zlib1g",
-            "libpng16-16",
-            "libmariadb3",
-            "libpthread-stubs0-dev",
-            "locales",
-        ]
+        self.__packages = {
+            "build": [
+                "make",
+                "cmake",
+                "gcc",
+                "g++",
+                "curl",
+                "pkg-config",
+                "libcurl4-openssl-dev",
+                "zlib1g-dev",
+                "libpng-dev",
+                "default-libmysqlclient-dev",
+                "libwebsockets-dev",
+                "apt-utils",
+                "build-essential",
+                "nodejs",
+            ],
+            "release": [
+                "libcurl4",
+                "zlib1g",
+                "libpng16-16",
+                "libmariadb3",
+                "libpthread-stubs0-dev",
+                "locales",
+            ],
+        }
 
     def get_name(self):
         """ return subcommand name """
@@ -131,8 +133,8 @@ RUN """ + command_node + """
 
 # basic libs
 RUN apt-get update && apt-get install -y --no-install-recommends \\
-    """ + " \\\n    ".join(self.__build_packages) + """ \\
-    """ + " \\\n    ".join(self.__release_packages) + """
+    """ + " \\\n    ".join(self.__packages["build"]) + """ \\
+    """ + " \\\n    ".join(self.__packages["release"]) + """
 
 # RUN node --version
 # RUN npm --version
@@ -165,7 +167,7 @@ LABEL "repository"="https://github.com/freehackquest/fhq-server"
 
 RUN apt-get update && \\
     apt-get install -y \\
-    """ + " \\\n    ".join(self.__release_packages) + """
+    """ + " \\\n    ".join(self.__packages["release"]) + """
 
 # RUN locale-gen en_US.UTF-8
 RUN sed -i -e "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/" /etc/locale.gen && \\

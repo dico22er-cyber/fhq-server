@@ -118,23 +118,31 @@ class SwaModalDialog {
 
     show(cnf) {
         swaModalDialogs.push(this.modalId)
-        // console.log(cnf)
         var body = '';
+        if (cnf["show_close"] === undefined) {
+            cnf["show_close"] = true;
+        }
+        // console.log(cnf)
         for (var i in cnf.body) {
             body += '<div class="swa-modal-dialog-box-content-line">' + cnf.body[i] + '</div>';
         }
-        document.body.innerHTML += ''
+        var content = '';
+        content += ''
             + '<div class="swa-modal-dialog" id="' + this.modalId + '">'
             + '  <div class="swa-modal-dialog-background"></div>'
             + '  <div class="swa-modal-dialog-box">'
             + '    <div class="swa-modal-dialog-box-head">'
-            + '      <div class="swa-modal-dialog-box-title">' + cnf.title + '</div>'
-            + '      <div class="swa-modal-dialog-box-close" onclick="swaCloseModalDialog(\'' + this.modalId + '\')">X</div>'
+            + '      <div class="swa-modal-dialog-box-title">' + cnf.title + '</div>';
+            if (cnf["show_close"]) {
+                content += '      <div class="swa-modal-dialog-box-close" onclick="swaCloseModalDialog(\'' + this.modalId + '\')">X</div>'
+            }
+        content += ''
             + '    </div>'
             + '    <div class="swa-modal-dialog-box-content">' + body + '</div>'
             + '    <div class="swa-modal-dialog-box-buttons">' + cnf.buttons + ' </div>'
             + '  </div>'
             + '</div>';
+        document.body.innerHTML += content;
     }
 
     close() {
@@ -143,7 +151,7 @@ class SwaModalDialog {
 }
 
 function swaShowModalError(error) {
-    
+    console.error("TODO: ", error);
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {

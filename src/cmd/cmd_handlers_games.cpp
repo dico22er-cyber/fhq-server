@@ -495,25 +495,91 @@ CmdHandlerGameUpdate::CmdHandlerGameUpdate() : CmdHandlerBase("game_update", "Up
 void CmdHandlerGameUpdate::handle(ModelRequest *pRequest) {
   EmployGames *pEmployGames = findWsjcppEmploy<EmployGames>();
 
-  ModelGame updatedModelGame;
-  std::string sError;
-  if (!updatedModelGame.fillFrom(pRequest->jsonRequest(), sError)) {
-    pRequest->sendMessageError(cmd(), WsjcppJsonRpc20Error(400, "Game have wrong format: " + sError));
-    return;
-  }
+  nlohmann::json jsonGameUpdate = pRequest->jsonRequest();
+  std::string sUuid = jsonGameUpdate["uuid"];
 
-  ModelGame modelGame;
-  if (!pEmployGames->findGame(updatedModelGame.uuid(), modelGame)) {
+  WsjcppLog::info(TAG, "Game uuid: " + sUuid);
+
+  // TODO fillFrom(silent = true)
+  ModelGame updatedModelGame;
+  if (!pEmployGames->findGame(sUuid, updatedModelGame)) {
     pRequest->sendMessageError(cmd(), WsjcppJsonRpc20Error(404, "Game not found"));
     return;
   }
 
-  updatedModelGame.copy(modelGame);
-  if (!updatedModelGame.fillFrom(pRequest->jsonRequest(), sError)) { // will be replaced values for existing fields
-    pRequest->sendMessageError(cmd(), WsjcppJsonRpc20Error(400, "Game have wrong format: " + sError));
-    return;
+  // update name
+  nlohmann::json::const_iterator it = jsonGameUpdate.find("name");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["name"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setName(sValue);
   }
 
+  // update description
+  it = jsonGameUpdate.find("description");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["description"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setDescription(sValue);
+  }
+
+  // update state
+  it = jsonGameUpdate.find("state");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["state"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setState(sValue);
+  }
+
+  // update state
+  it = jsonGameUpdate.find("form");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["form"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setForm(sValue);
+  }
+
+  // update state
+  it = jsonGameUpdate.find("type");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["type"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setType(sValue);
+  }
+
+  // update date_start
+  it = jsonGameUpdate.find("date_start");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["date_start"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setDateStart(sValue);
+  }
+
+  // update date_stop
+  it = jsonGameUpdate.find("date_stop");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["date_stop"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setDateStop(sValue);
+  }
+
+  // update date_stop
+  it = jsonGameUpdate.find("date_restart");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["date_restart"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setDateRestart(sValue);
+  }
+
+  // update organizators
+  it = jsonGameUpdate.find("organizators");
+  if (it != jsonGameUpdate.end()) {
+    std::string sValue = jsonGameUpdate["organizators"];
+    WsjcppCore::trim(sValue);
+    updatedModelGame.setOrganizators(sValue);
+  }
+
+  std::string sError;
   EmployResult nResult = pEmployGames->updateGame(updatedModelGame, sError);
 
   switch (nResult) {
@@ -530,8 +596,8 @@ void CmdHandlerGameUpdate::handle(ModelRequest *pRequest) {
 
   case EmployResult::OK: {
     nlohmann::json jsonResponse;
-    pEmployGames->findGame(modelGame.uuid(), modelGame);
-    jsonResponse["data"] = modelGame.toJson();
+    pEmployGames->findGame(sUuid, updatedModelGame);
+    jsonResponse["data"] = updatedModelGame.toJson();
     pRequest->sendMessageSuccess(cmd(), jsonResponse);
     break;
   }
@@ -562,13 +628,12 @@ CmdHandlerGameUpdateLogo::CmdHandlerGameUpdateLogo() : CmdHandlerBase("game_upda
 void CmdHandlerGameUpdateLogo::handle(ModelRequest *pRequest) {
   EmployGames *pEmployGames = findWsjcppEmploy<EmployGames>();
 
+  nlohmann::json jsonGameUpdate = pRequest->jsonRequest();
+  std::string sUuid = jsonGameUpdate["uuid"];
+
   ModelGame modelGame;
   std::string sError;
-  if (!modelGame.fillFrom(pRequest->jsonRequest(), sError)) {
-    pRequest->sendMessageError(cmd(), WsjcppJsonRpc20Error(400, "Game have wrong format: " + sError));
-    return;
-  }
-  if (!pEmployGames->findGame(modelGame.uuid(), modelGame)) {
+  if (!pEmployGames->findGame(sUuid, modelGame)) {
     pRequest->sendMessageError(cmd(), WsjcppJsonRpc20Error(404, "Game not found"));
     return;
   }

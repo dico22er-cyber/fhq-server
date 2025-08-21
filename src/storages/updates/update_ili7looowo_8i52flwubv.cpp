@@ -7,6 +7,8 @@
  *  |_| |_| |_|\__, |     |___/\___|_|    \_/ \___|_|
  *                |_|
  *
+ * MIT License
+ *
  * Copyright (c) 2011-2025 FreeHackQuest <freehackquest@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,25 +31,13 @@
  *
  ***********************************************************************************/
 
-#pragma once
+#include "update_ili7looowo_8i52flwubv.h"
 
-#include <cmd_handlers.h>
+REGISTRY_WSJCPP_STORAGE_UPDATE(Update_ili7looowo_8i52flwubv)
 
-class RunTasks {
-public:
-  static void AddPublicEvents(const std::string &sType, const std::string &sMessage, const nlohmann::json &jsonMeta);
-  static void UpdateUserLocation(int userid, const std::string &sLastip);
-  static void UpdateMaxScoreGame(int gameid);
-  static void UpdateUserRating(int nUserID);
-  static void UpdateQuestSolved(int nQuestID);
-  static void MailSend(const std::string &sTo, const std::string &sSubject, const std::string &sContent);
-  static void NotifyToAll(const nlohmann::json &jsonMessage);
-  static void LXDAsyncOperation(
-    void (*func)(const std::string &, std::string &, int &),
-    const std::string &sName,
-    const std::string &sCMD,
-    ModelRequest *pRequest
-  );
-  static void UpdateDatabaseAfterServerStart();
-  static void waitForDone();
-};
+Update_ili7looowo_8i52flwubv::Update_ili7looowo_8i52flwubv()
+  : WsjcppStorageUpdateBase("ili7looowo", "8i52flwubv", "Add column uuid to public_events") {
+
+  WsjcppStorageModifyTable *games = modifyTable("public_events");
+  games->addColumn("uuid").string(36).notNull().defaultValue("");
+}

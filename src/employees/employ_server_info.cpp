@@ -38,6 +38,7 @@
 #include <employ_notify.h>
 #include <employ_server_info.h>
 #include <employees.h>
+#include <runtasks.h>
 
 REGISTRY_WJSCPP_EMPLOY(EmployServerInfo)
 
@@ -148,6 +149,7 @@ void EmployServerInfo::serverStarted() {
   m_dtServerStarted = WsjcppCore::getCurrentTimeInMilliseconds();
   EmployNotify *pNotify = findWsjcppEmploy<EmployNotify>();
   pNotify->notifySuccess("server", "Server started");
+  RunTasks::UpdateDatabaseAfterServerStart();
 }
 
 // ---------------------------------------------------------------------

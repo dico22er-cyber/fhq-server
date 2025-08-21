@@ -41,6 +41,7 @@ public:
   virtual bool init();
   virtual bool deinit();
 
+  static std::string SERVER;
   static std::string GAMES;
   static std::string QUESTS;
   static std::string USERS;
