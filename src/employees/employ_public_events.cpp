@@ -48,7 +48,6 @@ EmployPublicEvents::EmployPublicEvents()
 }
 
 bool EmployPublicEvents::init() {
-  WsjcppLog::info(TAG, "Start init users");
   findWsjcppEmploy<EmployUuids>()->addAllowedTypesOfUuid("public_event");
   return true;
 }
