@@ -5,8 +5,14 @@ All notable changes to fhq-server project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v0.2.54] - 2025-08-10 (2025 ???)
+## [v0.2.54] - 2025-08-21 (2025 Aug 21)
 
+- Fix Dockerfile
+- [web-admin] Fix login dialog
+- Fix game_update and game_update_logo
+- Removed ci/travis/run2_language_node_js.sh
+- Fix warning: return in src/database/fhq_server_database_file.cpp
+- Fix clang-format
 - Added new task for runtime migration data (update missing uuids)
 - Removed unsed and deprecated options
 - Fix TODO deprecated setWorkDir and fix behaivor when not set '-wd'
