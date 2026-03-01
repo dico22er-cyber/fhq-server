@@ -88,13 +88,6 @@ Admin interface: http://localhost:801/admin/
 
 *Note: default login/password: admin/admin*
 
-<!-- * [INSTALL_FROM_PPA](https://github.com/freehackquest/fhq-server/tree/master/install/INSTALL_FROM_PPA.md) 
-
-* Configure autostart
-    * [SYSTEMD](install/SYSTEMD.md)
-    * [INITD](install/INITD.md)
--->
-
 ## Distribution
 
 | What                    | Where         |  Source code |
@@ -320,18 +313,6 @@ Rebuild fresh docker
 ```
 $ docker build -t sea5kg/fhq-server:latest .
 $ docker tag sea5kg/fhq-server:latest sea5kg/fhq-server:v0.2.xx
-```
-
-## Ubuntu - install from ppa (outdated)
-
-*Note: Not working now*
-
-[https://launchpad.net/~freehackquest/+archive/ubuntu/fhq-server](https://launchpad.net/~freehackquest/+archive/ubuntu/fhq-server)
-
-```
-$ sudo add-apt-repository ppa:freehackquest/fhq-server
-$ sudo apt update
-$ sudo apt install fhq-server
 ```
 
 ## Configure systemd on host system (Ubuntu/Debian)
