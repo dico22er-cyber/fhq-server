@@ -5,9 +5,6 @@ import { ServerApiComponent } from './pages/server-api/server-api.component';
 import { MapActivityComponent } from './pages/map-activity/map-activity.component';
 import { EventsComponent } from './pages/events/events.component';
 import { ChatComponent } from './pages/chat/chat.component';
-import { AutomationUssrComponent } from './pages/automation-ussr/automation-ussr.component';
-import { AutomationUssrPresentationComponent } from './pages/automation-ussr-presentation/automation-ussr-presentation.component';
-import { AutomationUssrRatingComponent } from './pages/automation-ussr-rating/automation-ussr-rating.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { UsefulLinksComponent } from './pages/useful-links/useful-links.component';
@@ -63,15 +60,6 @@ const routes: Routes = [{
   }, {
     path: 'chat',
     component: ChatComponent
-  }, {
-    path: 'automation-ussr',
-    component: AutomationUssrComponent
-  }, {
-    path: 'automation-ussr-presentation',
-    component: AutomationUssrPresentationComponent
-  }, {
-    path: 'automation-ussr-rating',
-    component: AutomationUssrRatingComponent
   }, {
     path: 'registration',
     component: RegistrationComponent

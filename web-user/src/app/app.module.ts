@@ -41,9 +41,6 @@ import { MapActivityComponent } from './pages/map-activity/map-activity.componen
 import { EventsComponent } from './pages/events/events.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './pages/chat/chat.component';
-import { AutomationUssrComponent } from './pages/automation-ussr/automation-ussr.component';
-import { AutomationUssrPresentationComponent } from './pages/automation-ussr-presentation/automation-ussr-presentation.component';
-import { AutomationUssrRatingComponent } from './pages/automation-ussr-rating/automation-ussr-rating.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { UsefulLinksComponent } from './pages/useful-links/useful-links.component';
@@ -97,9 +94,6 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     MapActivityComponent,
     EventsComponent,
     ChatComponent,
-    AutomationUssrComponent,
-    AutomationUssrPresentationComponent,
-    AutomationUssrRatingComponent,
     RegistrationComponent,
     ResetPasswordComponent,
     UsefulLinksComponent,
